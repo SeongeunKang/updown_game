@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,8 +23,19 @@ class MainActivity : AppCompatActivity() {
         buttonSubmit = findViewById(R.id.btn_submit)
         editText = findViewById(R.id.edt_number)
 
+        // 랜덤 생성된 넘버
+        val randomNumber= Random().nextInt(100) // 0 to 100
+
         buttonSubmit.setOnClickListener {
-            Snackbar.make(linearLayout, "hello", LENGTH_SHORT).show()
+
+
+            // 유저가 입력한 넘버
+            val userInput= editText.text.toString().toInt()
+
+            if(randomNumber == userInput) {
+                Snackbar.make(linearLayout, "Correct!", LENGTH_SHORT).show()
+            }
+
         }
     }
 }
