@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
@@ -28,12 +29,21 @@ class MainActivity : AppCompatActivity() {
 
         buttonSubmit.setOnClickListener {
 
-
             // 유저가 입력한 넘버
-            val userInput= editText.text.toString().toInt()
+            val userInput= editText.text.toString()
+            if(userInput.isEmpty()) {
+                return@setOnClickListener
+            }
 
-            if(randomNumber == userInput) {
-                Snackbar.make(linearLayout, "Correct!", LENGTH_SHORT).show()
+            if(randomNumber == userInput.toInt()) {
+                Toast.makeText(applicationContext, "Correct!", Toast.LENGTH_SHORT).show()
+                //Snackbar.make(linearLayout, "Correct!", LENGTH_SHORT).show()
+            }else if(randomNumber > userInput.toInt()) {
+                Toast.makeText(applicationContext, "High!", Toast.LENGTH_SHORT).show()
+                //Snackbar.make(linearLayout, "High!", LENGTH_SHORT).show()
+            }else if(randomNumber < userInput.toInt()) {
+                Toast.makeText(applicationContext, "Low!", Toast.LENGTH_SHORT).show()
+                //Snackbar.make(linearLayout, "Low!", LENGTH_SHORT).show()
             }
 
         }
